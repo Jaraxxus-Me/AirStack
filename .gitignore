@@ -61,3 +61,4 @@ frames_*.pdf
 nucleus_token.txt
 
 docker/sitl_integration/px
+robot/ros_ws/src/spot_ros2

@@ -1,8 +1,8 @@
 # docker compose file
 services:
-# ==============================================================================
+  # ==============================================================================
   robot:
-    image: &airstack-dev-image airlab-storage.andrew.cmu.edu:5001/shared/airstack-dev:v0.5.5
+    image: &airstack-dev-image bowenli1024/airstack-spot:v0
     build:
       dockerfile: ./Dockerfile.airstack-dev
       tags:
@@ -10,12 +10,7 @@ services:
     entrypoint: ""
     # we use tmux send-keys so that the session stays alive
     command: >
-      bash -c "ssh service restart;
-      tmux new -d -s robot_bringup
-      && tmux send-keys -t robot_bringup 
-      'if [ ! -d "ros_ws/install" ]; then bws && sws; fi;
-      ros2 launch robot_bringup robot.launch.xml' ENTER
-      && sleep infinity"
+      bash -c "ssh service restart; tmux new -d -s robot_bringup && tmux send-keys -t robot_bringup  'if [ ! -d "ros_ws/install" ]; then bws && sws; fi; ros2 launch robot_bringup robot.launch.xml' ENTER && sleep infinity"
     # Interactive shell
     stdin_open: true # docker run -i
     tty: true # docker run -t
@@ -46,9 +41,9 @@ services:
       - .bashrc:/root/.bashrc:rw # bash config
       - /var/run/docker.sock:/var/run/docker.sock # access docker API for container name
       # autonomy stack stuff
-      - ../../common/ros_packages:/root/ros_ws/src/common:rw  # common ROS packages
-      - ../../common/ros_packages/fastdds.xml:/root/ros_ws/fastdds.xml:rw  # fastdds.xml
-      - ../ros_ws:/root/ros_ws:rw  # robot-specific ROS packages
+      - ../../common/ros_packages:/root/ros_ws/src/common:rw # common ROS packages
+      - ../../common/ros_packages/fastdds.xml:/root/ros_ws/fastdds.xml:rw # fastdds.xml
+      - ../ros_ws:/root/ros_ws:rw # robot-specific ROS packages
 # ==============================================================================
 networks:
   airstack_network:
