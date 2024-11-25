@@ -34,6 +34,7 @@ This repo aims at integrating Spot2 ROS2 and AirStack.
     cd [AirStack]/robot/ros_ws/src
     git clone https://github.com/Jaraxxus-Me/spot_ros2.git
     ```
+    Make a copy of `robot/ros_ws/src/spot_ros2/spot_driver/config/spot_ros_example.yaml` to `robot/ros_ws/src/spot_ros2/spot_driver/config/spot_ros_airlab.yaml`, fill in the username and pwd of the yaml file to your spot.
 
 3. Use Spot ROS2 in Docker
     ```shell
@@ -70,6 +71,7 @@ This repo aims at integrating Spot2 ROS2 and AirStack.
 2. Test power
 
     WARNING: Here the Spot will stand up and take a picture, please don't be too close to it.
+    Fill in the username and pwd of the `starter.sh` to your spot.
     Inside the docker container, run
     ```shell
     bash src/spot_ros2/starter.sh
